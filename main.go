@@ -27,7 +27,7 @@ func GetHandler() *http.ServeMux {
 	httpMux := http.NewServeMux()
 	httpMux.HandleFunc("/", func(rw http.ResponseWriter, r *http.Request) {
 		rw.WriteHeader(http.StatusOK)
-		rw.Write([]byte("hello2"))
+		rw.Write([]byte("hello"))
 	})
 	return httpMux
 }
