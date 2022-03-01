@@ -1,18 +1,14 @@
-package firstname
-
-import "context"
+package email
 
 type Service struct {
-	Repository FirstName
+	Repository Email
 }
 
 func NewService() *Service {
 	return &Service{
-		Repository: NewSubstrRepository(),
+		Repository: NewEmailRepository(),
 	}
 }
 
-type FirstNameService interface {
-	FindBySymbol(ctx context.Context, query string) (string, error)
-	FindBySelf(ctx context.Context, query string) ([]string, error)
+type EmailService interface {
 }

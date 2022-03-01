@@ -7,4 +7,4 @@ test:
 swag:
 	swag init -d internal/api -g api.go --parseDependency --parseInternal
 
-.PHONY: run test
+.PHONY: run test swag

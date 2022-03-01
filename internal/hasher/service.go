@@ -1,18 +1,14 @@
-package firstname
-
-import "context"
+package hasher
 
 type Service struct {
-	Repository FirstName
+	Repository Hasher
 }
 
 func NewService() *Service {
 	return &Service{
-		Repository: NewSubstrRepository(),
+		Repository: NewHasherRepository(),
 	}
 }
 
-type FirstNameService interface {
-	FindBySymbol(ctx context.Context, query string) (string, error)
-	FindBySelf(ctx context.Context, query string) ([]string, error)
+type HasherService interface {
 }

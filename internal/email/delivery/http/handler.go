@@ -2,14 +2,14 @@ package http
 
 import (
 	"github.com/labstack/echo/v4"
-	"github.com/omekov/sosedi-group/internal/firstname"
+	"github.com/omekov/sosedi-group/internal/email"
 )
 
 type Handler struct {
-	counterService *firstname.Service
+	counterService *email.Service
 }
 
-func NewHandler(service *firstname.Service) *Handler {
+func NewHandler(service *email.Service) *Handler {
 	return &Handler{service}
 }
 

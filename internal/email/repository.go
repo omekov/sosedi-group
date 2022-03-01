@@ -1,20 +1,11 @@
-package firstname
+package email
 
-import (
-	"context"
-)
-
-type firstNameRepository struct {
+type emailRepository struct {
 }
 
-func NewSubstrRepository() *firstNameRepository {
-	return &firstNameRepository{}
+func NewEmailRepository() *emailRepository {
+	return &emailRepository{}
 }
 
-type FirstName interface {
-	GetAll(ctx context.Context) ([]string, error)
-}
-
-func (r *firstNameRepository) GetAll(ctx context.Context) ([]string, error) {
-	return []string{}, nil
+type Email interface {
 }

@@ -1,20 +1,11 @@
-package firstname
+package hasher
 
-import (
-	"context"
-)
-
-type firstNameRepository struct {
+type hasherRepository struct {
 }
 
-func NewSubstrRepository() *firstNameRepository {
-	return &firstNameRepository{}
+func NewHasherRepository() *hasherRepository {
+	return &hasherRepository{}
 }
 
-type FirstName interface {
-	GetAll(ctx context.Context) ([]string, error)
-}
-
-func (r *firstNameRepository) GetAll(ctx context.Context) ([]string, error) {
-	return []string{}, nil
+type Hasher interface {
 }
