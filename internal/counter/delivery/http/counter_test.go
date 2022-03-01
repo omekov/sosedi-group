@@ -13,7 +13,7 @@ import (
 
 	"github.com/golang/mock/gomock"
 	"github.com/omekov/sosedi-group/internal/counter"
-	mocks "github.com/omekov/sosedi-group/mocks"
+	mocks "github.com/omekov/sosedi-group/internal/counter/mocks"
 )
 
 func TestCounterAdd(t *testing.T) {
@@ -25,11 +25,13 @@ func TestCounterAdd(t *testing.T) {
 		mockBehavior mockBehavior
 		responseBody string
 		num          uint64
+		expetedNum   uint64
 	}{
 		{
 			name:       "success",
 			statusCode: 200,
 			num:        num,
+			expetedNum: num + 1,
 			mockBehavior: func(r *mocks.MockCounter, num uint64) {
 				r.EXPECT().Set(context.Background(), num).Return(nil)
 				r.EXPECT().Get(context.Background()).Return(strconv.Itoa(int(num)), nil)
@@ -43,7 +45,7 @@ func TestCounterAdd(t *testing.T) {
 			defer c.Finish()
 
 			counterRepo := mocks.NewMockCounter(c)
-			tt.mockBehavior(counterRepo, tt.num+1)
+			tt.mockBehavior(counterRepo, tt.expetedNum)
 
 			counterService := counter.Service{
 				Repository: counterRepo,
@@ -73,11 +75,13 @@ func TestCounterSub(t *testing.T) {
 		mockBehavior mockBehavior
 		responseBody string
 		num          uint64
+		expetedNum   uint64
 	}{
 		{
 			name:       "success",
 			statusCode: 200,
 			num:        num,
+			expetedNum: num - 1,
 			mockBehavior: func(r *mocks.MockCounter, num uint64) {
 				r.EXPECT().Set(context.Background(), num).Return(nil)
 				r.EXPECT().Get(context.Background()).Return(strconv.Itoa(int(num)), nil)
@@ -91,7 +95,7 @@ func TestCounterSub(t *testing.T) {
 			defer c.Finish()
 
 			counterRepo := mocks.NewMockCounter(c)
-			tt.mockBehavior(counterRepo, tt.num-1)
+			tt.mockBehavior(counterRepo, tt.expetedNum)
 
 			counterService := counter.Service{
 				Repository: counterRepo,
@@ -113,19 +117,23 @@ func TestCounterSub(t *testing.T) {
 	}
 }
 func TestCounterVal(t *testing.T) {
+	var num uint64 = 12
 	type mockBehavior func(r *mocks.MockCounter, num uint64)
 	testCases := []struct {
 		name         string
 		statusCode   int
+		expetedNum   uint64
 		mockBehavior mockBehavior
+		responseBody string
 	}{
 		{
-			name:       "error",
-			statusCode: 500,
+			name:       "success",
+			statusCode: 200,
+			expetedNum: num,
 			mockBehavior: func(r *mocks.MockCounter, num uint64) {
-				r.EXPECT().Set(context.Background(), num).Return(nil)
 				r.EXPECT().Get(context.Background()).Return(strconv.Itoa(int(num)), nil)
 			},
+			responseBody: strconv.Itoa(int(num)),
 		},
 	}
 	for _, tt := range testCases {
@@ -134,7 +142,7 @@ func TestCounterVal(t *testing.T) {
 			defer c.Finish()
 
 			counterRepo := mocks.NewMockCounter(c)
-			tt.mockBehavior(counterRepo, 4)
+			tt.mockBehavior(counterRepo, tt.expetedNum)
 
 			counterService := counter.Service{
 				Repository: counterRepo,
@@ -143,7 +151,7 @@ func TestCounterVal(t *testing.T) {
 			handler := NewHandler(&counterService)
 
 			router := echo.New()
-			router.GET("/val", handler.counterSub)
+			router.GET("/val", handler.counterVal)
 
 			w := httptest.NewRecorder()
 			req := httptest.NewRequest(http.MethodGet, "/val", nil)
@@ -151,6 +159,7 @@ func TestCounterVal(t *testing.T) {
 			router.ServeHTTP(w, req)
 
 			assert.Equal(t, w.Code, tt.statusCode)
+			assert.Equal(t, w.Body.String(), tt.responseBody)
 		})
 	}
 }

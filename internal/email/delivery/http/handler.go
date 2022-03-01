@@ -6,7 +6,7 @@ import (
 )
 
 type Handler struct {
-	counterService *email.Service
+	emailService *email.Service
 }
 
 func NewHandler(service *email.Service) *Handler {
@@ -14,13 +14,8 @@ func NewHandler(service *email.Service) *Handler {
 }
 
 func (h *Handler) Init(api *echo.Group) {
-	// substrApi := api.Group("/substr")
-	// {
-
-	// }
-
-	// selfApi := api.Group("/self")
-	// {
-
-	// }
+	emailApi := api.Group("/email")
+	{
+		emailApi.POST("/check", h.emailCheck)
+	}
 }
