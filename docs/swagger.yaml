@@ -1,0 +1,43 @@
+info:
+  contact: {}
+paths:
+  /rest/counter/add/{num}:
+    post:
+      description: Redis increment
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Counter Add (increment)
+      tags:
+      - counter
+  /rest/counter/sub/{num}:
+    post:
+      description: Redis decrement
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Counter Sub (decrement)
+      tags:
+      - counter
+  /rest/counter/val:
+    get:
+      description: Redis get num
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Counter Val
+      tags:
+      - counter
+swagger: "2.0"
