@@ -1,9 +1,20 @@
+basePath: /
+host: localhost:8080
 info:
   contact: {}
+  description: REST API for Sosedi Group API
+  title: Sosedi Group API
+  version: "1.0"
 paths:
   /rest/counter/add/{num}:
     post:
       description: Redis increment
+      parameters:
+      - description: Counter number
+        in: path
+        name: num
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
@@ -17,6 +28,12 @@ paths:
   /rest/counter/sub/{num}:
     post:
       description: Redis decrement
+      parameters:
+      - description: Counter number
+        in: path
+        name: num
+        required: true
+        type: integer
       produces:
       - application/json
       responses:

@@ -11,3 +11,7 @@ func Decrement(num uint64) uint64 {
 
 	return num - 1
 }
+
+func RandomStringList() []string {
+	return []string{}
+}

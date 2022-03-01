@@ -1,8 +1,13 @@
 {
     "swagger": "2.0",
     "info": {
-        "contact": {}
+        "description": "REST API for Sosedi Group API",
+        "title": "Sosedi Group API",
+        "contact": {},
+        "version": "1.0"
     },
+    "host": "localhost:8080",
+    "basePath": "/",
     "paths": {
         "/rest/counter/add/{num}": {
             "post": {
@@ -14,6 +19,15 @@
                     "counter"
                 ],
                 "summary": "Counter Add (increment)",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Counter number",
+                        "name": "num",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -34,6 +48,15 @@
                     "counter"
                 ],
                 "summary": "Counter Sub (decrement)",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Counter number",
+                        "name": "num",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",

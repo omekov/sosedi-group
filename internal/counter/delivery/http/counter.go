@@ -11,6 +11,7 @@ import (
 // @Description Redis increment
 // @ModuleID counterAdd
 // @Produce  json
+// @Param num path int true "Counter number"
 // @Success 200 {string} string
 // @Router /rest/counter/add/{num} [post]
 func (h *Handler) counterAdd(c echo.Context) error {
@@ -31,6 +32,7 @@ func (h *Handler) counterAdd(c echo.Context) error {
 // @Description Redis decrement
 // @ModuleID counterSub
 // @Produce  json
+// @Param num path int true "Counter number"
 // @Success 200 {string} string
 // @Router /rest/counter/sub/{num} [post]
 func (h *Handler) counterSub(c echo.Context) error {

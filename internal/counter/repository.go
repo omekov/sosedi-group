@@ -23,7 +23,7 @@ type Counter interface {
 
 func (r *couterRepository) Set(ctx context.Context, num uint64) error {
 	if r.key == "" {
-		return fmt.Errorf("redisGet key: %s empty", r.key)
+		return fmt.Errorf("redisSet key: %s empty", r.key)
 	}
 
 	return r.client.Set(ctx, r.key, num, 0).Err()

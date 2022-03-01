@@ -5,6 +5,6 @@ test:
 	go test ./... -v -cover -race
 
 swag:
-	swag init -g ./cmd/api/main.go --parseDependency --parseInternal
+	swag init -d internal/api -g api.go --parseDependency --parseInternal
 
 .PHONY: run test
