@@ -1,4 +1,10 @@
 basePath: /
+definitions:
+  http.CheckRequest:
+    properties:
+      text:
+        type: string
+    type: object
 host: localhost:8080
 info:
   contact: {}
@@ -57,4 +63,44 @@ paths:
       summary: Counter Val
       tags:
       - counter
+  /rest/email/check:
+    post:
+      description: Email Check
+      parameters:
+      - description: CheckRequest
+        in: body
+        name: CheckRequest
+        required: true
+        schema:
+          $ref: '#/definitions/http.CheckRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Email Check
+      tags:
+      - email
+  /rest/email/iin:
+    post:
+      description: IIN Check
+      parameters:
+      - description: CheckRequest
+        in: body
+        name: CheckRequest
+        required: true
+        schema:
+          $ref: '#/definitions/http.CheckRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: IIN Check
+      tags:
+      - email
 swagger: "2.0"

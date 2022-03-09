@@ -1,5 +1,9 @@
 package email
 
+import (
+	"github.com/omekov/sosedi-group/pkg/util"
+)
+
 type Service struct {
 	Repository Email
 }
@@ -11,10 +15,16 @@ func NewService() *Service {
 }
 
 type EmailService interface {
-	FindEmail(text string) (string, error)
+	FindEmailFromText(text string) (string, error)
+	FindIINFromText(text string) (string, error)
 }
 
-func (s *Service) FindEmail(text string) (string, error) {
+func (s *Service) FindEmailFromText(text string) (string, error) {
+	email := util.FindEmailFromText(text)
+	return email, nil
+}
 
-	return "", nil
+func (s *Service) FindIINFromText(text string) (string, error) {
+	iin := util.FindIINFromText(text)
+	return iin, nil
 }

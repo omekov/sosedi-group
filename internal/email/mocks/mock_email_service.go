@@ -33,17 +33,32 @@ func (m *MockEmailService) EXPECT() *MockEmailServiceMockRecorder {
 	return m.recorder
 }
 
-// FindEmail mocks base method.
-func (m *MockEmailService) FindEmail(text string) (string, error) {
+// FindEmailFromText mocks base method.
+func (m *MockEmailService) FindEmailFromText(text string) (string, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "FindEmail", text)
+	ret := m.ctrl.Call(m, "FindEmailFromText", text)
 	ret0, _ := ret[0].(string)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// FindEmail indicates an expected call of FindEmail.
-func (mr *MockEmailServiceMockRecorder) FindEmail(text interface{}) *gomock.Call {
+// FindEmailFromText indicates an expected call of FindEmailFromText.
+func (mr *MockEmailServiceMockRecorder) FindEmailFromText(text interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FindEmail", reflect.TypeOf((*MockEmailService)(nil).FindEmail), text)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FindEmailFromText", reflect.TypeOf((*MockEmailService)(nil).FindEmailFromText), text)
+}
+
+// FindIINFromText mocks base method.
+func (m *MockEmailService) FindIINFromText(text string) (string, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "FindIINFromText", text)
+	ret0, _ := ret[0].(string)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// FindIINFromText indicates an expected call of FindIINFromText.
+func (mr *MockEmailServiceMockRecorder) FindIINFromText(text interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FindIINFromText", reflect.TypeOf((*MockEmailService)(nil).FindIINFromText), text)
 }

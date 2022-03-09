@@ -86,6 +86,78 @@
                     }
                 }
             }
+        },
+        "/rest/email/check": {
+            "post": {
+                "description": "Email Check",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "email"
+                ],
+                "summary": "Email Check",
+                "parameters": [
+                    {
+                        "description": "CheckRequest",
+                        "name": "CheckRequest",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/http.CheckRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/email/iin": {
+            "post": {
+                "description": "IIN Check",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "email"
+                ],
+                "summary": "IIN Check",
+                "parameters": [
+                    {
+                        "description": "CheckRequest",
+                        "name": "CheckRequest",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/http.CheckRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "http.CheckRequest": {
+            "type": "object",
+            "properties": {
+                "text": {
+                    "type": "string"
+                }
+            }
         }
     }
 }

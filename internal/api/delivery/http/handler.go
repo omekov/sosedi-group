@@ -7,16 +7,20 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/omekov/sosedi-group/internal/counter"
 	counterHTTP "github.com/omekov/sosedi-group/internal/counter/delivery/http"
+	"github.com/omekov/sosedi-group/internal/email"
+	emailHTTP "github.com/omekov/sosedi-group/internal/email/delivery/http"
 	echoSwagger "github.com/swaggo/echo-swagger"
 )
 
 type Handler struct {
 	counterService *counter.Service
+	emailService   *email.Service
 }
 
-func NewHandler(counterService *counter.Service) *Handler {
+func NewHandler(counterService *counter.Service, emailService *email.Service) *Handler {
 	return &Handler{
 		counterService,
+		emailService,
 	}
 }
 
@@ -34,10 +38,16 @@ func (h *Handler) Init() *echo.Echo {
 		return c.JSON(http.StatusOK, nil)
 	})
 
-	handlerV1 := counterHTTP.NewHandler(h.counterService)
 	counterGroup := router.Group("/rest")
+
+	counterHandler := counterHTTP.NewHandler(h.counterService)
 	{
-		handlerV1.Init(counterGroup)
+		counterHandler.Init(counterGroup)
+	}
+
+	emailHandler := emailHTTP.NewHandler(h.emailService)
+	{
+		emailHandler.Init(counterGroup)
 	}
 
 	return router
